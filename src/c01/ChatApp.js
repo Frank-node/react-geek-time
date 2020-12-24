@@ -3,19 +3,25 @@ import withTimer from "../c06/withTimer";
 
 class MessageList extends React.PureComponent {
   render() {
-    return <ul>{this.props.messages.map(msg => <li>{msg}</li>)}</ul>;
+    return (
+      <ul>
+        {this.props.messages.map((msg) => (
+          <li>{msg}</li>
+        ))}
+      </ul>
+    );
   }
 }
 
 export class ChatApp extends React.Component {
   state = {
     messages: [],
-    inputMsg: "",
+    inputMsg: ""
   };
 
-  handleInput = evt => {
+  handleInput = (evt) => {
     this.setState({
-      inputMsg: evt.target.value,
+      inputMsg: evt.target.value
     });
   };
   handleSend = () => {
@@ -24,7 +30,7 @@ export class ChatApp extends React.Component {
       const newMessages = [...this.state.messages, text];
       this.setState({
         messages: newMessages,
-        inputMsg: "",
+        inputMsg: ""
       });
     }
   };
@@ -33,7 +39,7 @@ export class ChatApp extends React.Component {
       <div>
         <MessageList messages={this.state.messages} />
         <div>
-          <input value={this.state.inputMsg} />
+          <input value={this.state.inputMsg} onChange={this.handleInput} />
           <button onClick={this.handleSend}>Send</button>
         </div>
         <h2>{this.props.time.toLocaleString()}</h2>
